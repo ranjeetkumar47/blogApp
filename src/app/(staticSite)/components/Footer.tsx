@@ -1,11 +1,10 @@
-import Container from '@/components/core/Container'
+import Container from '@/core/ui/Container'
 import { configuration } from '@/lib/siteConfiguration'
 import Image from 'next/image'
 import Link from 'next/link'
 
 const YEAR = new Date().getFullYear()
-
-function Footer() {
+const Footer = () => {
   return (
     <footer className={'py-8 lg:py-24'}>
       <Container>
