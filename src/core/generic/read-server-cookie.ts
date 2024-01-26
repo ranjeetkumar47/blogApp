@@ -1,17 +1,26 @@
-import type { cookies } from 'next/headers';
+import type { cookies as CookiesType } from 'next/headers'
 
-export type AnyCookies =
-  | ReturnType<typeof cookies>
-  | Partial<{
-      key: string;
-    }>;
-
-async function readServerCookie(cookies: AnyCookies, key: string) {
-  if ('get' in cookies && typeof cookies.get === 'function') {
-    return cookies.get(key)?.value;
-  }
-
-  return (cookies as StringObject)[key];
+type Cookie = {
+  value?: string
 }
 
-export default readServerCookie;
+type CookiesWithGetMethod = {
+  get(key: string): Cookie | undefined
+}
+
+type StringObject = {
+  [key: string]: string | undefined
+}
+
+export type AnyCookies = CookiesWithGetMethod | StringObject
+
+async function readServerCookie(cookies: AnyCookies, key: string): Promise<string | undefined> {
+  if ('get' in cookies && typeof cookies.get === 'function') {
+    const cookie = cookies.get(key)
+    return cookie?.value
+  }
+
+  return (cookies as StringObject)[key]
+}
+
+export default readServerCookie
