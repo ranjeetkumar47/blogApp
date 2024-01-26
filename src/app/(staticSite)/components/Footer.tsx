@@ -1,4 +1,6 @@
 import Container from '@/components/core/Container'
+import { configuration } from '@/lib/siteConfiguration'
+import Image from 'next/image'
 import Link from 'next/link'
 
 const YEAR = new Date().getFullYear()
@@ -10,20 +12,29 @@ function Footer() {
         <div className={'flex flex-col space-y-8 lg:flex-row lg:space-y-0'}>
           <div className={'flex w-full space-x-2 lg:w-4/12 xl:w-3/12' + ' xl:space-x-6 2xl:space-x-8'}>
             <div className={'flex flex-col space-y-4'}>
-              <div>{/* <LogoImage className={'w-[85px] md:w-[115px]'} /> */}</div>
+              <div>
+                <Image src={'/assets/images/logo.png'} alt="logo" width={140} height={100} />
+              </div>
 
               <div>
                 <p className={'text-sm text-gray-500 dark:text-gray-400'}>Add a short tagline about your product</p>
               </div>
 
               <div className={'flex text-xs text-gray-500 dark:text-gray-400'}>
-                <p>© Copyright {YEAR} Blog App. All Rights Reserved.</p>
+                <p>
+                  © Copyright {YEAR} {configuration.site.name}. All Rights Reserved.
+                </p>
               </div>
             </div>
           </div>
 
           <div
-            className={'flex flex-col space-y-8 lg:space-y-0 lg:space-x-6' + ' xl:space-x-16 2xl:space-x-20' + ' w-full lg:flex-row lg:justify-end'}
+            className={
+              'flex flex-col space-y-8 lg:space-y-0 lg:space-x-6' +
+              ' xl:space-x-16 2xl:space-x-20' +
+              ' w-full lg:flex-row lg:justify-end' +
+              ' md:flex-row md:justify-between'
+            }
           >
             <div>
               <div className={'flex flex-col space-y-4'}>
